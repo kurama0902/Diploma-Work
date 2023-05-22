@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/shopping-bag-style.css">
+    <title>Shopping bag</title>
+
+    <script>
+        console.log('shoping bag');
+    </script>
+</head>
+<body>
+    <div class="wrap">
+        <header class="header-wrap">
+            <div class="header-first-section">
+                <div class="logo">
+                    <a href="index.html" class="logo-link">JustWine</a>
+                </div>
+            </div>
+        </header>
+    <!-- <div class="exit-wrap">
+        <a class="exit" href="index.html">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2.22566 0.811082C1.83514 0.420557 1.20197 0.420557 0.811448 0.811082C0.420924 1.20161 0.420924 1.83477 0.811448 2.2253L6.58618 8.00003L0.811508 13.7747C0.420984 14.1652 0.420983 14.7984 0.811508 15.1889C1.20203 15.5794 1.8352 15.5794 2.22572 15.1889L8.0004 9.41424L13.7751 15.1889C14.1656 15.5794 14.7988 15.5794 15.1893 15.1889C15.5798 14.7984 15.5798 14.1652 15.1893 13.7747L9.41461 8.00003L15.1893 2.2253C15.5799 1.83477 15.5799 1.20161 15.1893 0.811082C14.7988 0.420557 14.1657 0.420557 13.7751 0.811082L8.0004 6.58582L2.22566 0.811082Z" fill="#434960"/>
+            </svg>
+        </a>
+    </div> -->
+    <h4 class="shopping-bag-label">My Shopping Bag </h4>
+    <div class="goods-wrap">
+    <a href="index.html" class="back-to-shopping-btn">Back to Shopping</a>
+    <div class="liked-items-modal-wrap" id="liked-items-modal-wrap">
+        <div class="liked-info-wrap">
+            <h1>Liked items:</h1>
+            <div class="liked-items-wrap">
+                <div class="liked-item">
+                    <img src="../img/wine.png" alt="">
+                    <p>Wonderful wine for drinking. From Italy. Price: 200$</p>
+                </div>
+                <div class="liked-item">
+                    <img src="../img/wine.png" alt="">
+                    <p>Wonderful wine for drinking. From Italy. Price: 200$</p>
+                </div>
+                <div class="liked-item">
+                    <img src="../img/wine.png" alt="">
+                    <p>Wonderful wine for drinking. From Italy. Price: 200$</p>
+                </div>
+                <button class="close-liked-modal-btn" id="close-liked-modal-btn">X</button>
+            </div>
+        </div>
+    </div>
+    <!-- <h1 class="total-price">Total: </h1> -->
+    <script src="../js/db.js"></script>
+    <script src="../js/showWines.js"></script>
+    <script src="../js/addToBusket.js"></script>
+
+
+</body>
+</html>

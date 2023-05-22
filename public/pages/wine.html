@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/style.css">
+    <title>Document</title>
+</head>
+<body class="usp-body">
+    <a href="index.html" class="usp-close-btn">X</button>
+    <script src="../js/db.js"></script>
+    <script>
+        const goodId = new URLSearchParams(window.location.search).get('id');
+
+        if (goodId) {
+
+            allWineCategories.forEach(category => {
+                let wine = category.find((item) => item.id === Number(goodId));
+                
+                if(wine) {
+                    document.body.innerHTML += `
+                <div class="viewed-wine-description">
+                <div class="img-and-nameOfWine-description" style="background-image: url('${wine.imgURL}');">
+                    <p class="nameOfWine-description">${wine.description}</p>
+                </div>
+                <p class="item-description">${wine.wineAllDescription}</p>           
+            </div>
+                `;
+                }
+            });
+        }
+    </script>
+</body>
+</html>
