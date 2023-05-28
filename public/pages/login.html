@@ -14,12 +14,31 @@
     <div class="login-wrap">
         <div class="login">
             <h1>Login</h1>
-            <form class="login-form" action="">
-                <input type="email" placeholder="email" required>
-                <input type="password" placeholder="password" required>
+            <form class="login-form" method="post" action="api/login">
+                <input name="email" type="email" placeholder="email" required>
+                <input name="pass" type="password" placeholder="password" required>
                 <input type="submit" value="Login">
             </form>
         </div>
     </div>
+    <!-- <script>
+      const form = document.querySelector('form'); 
+      form.addEventListener('submit', event => {
+        event.preventDefault();
+      })
+        const loginUser = async () => {
+            const res = await fetch('api/login', {
+                method: 'post',
+                headers: {
+                    "Content-Type": "application/json",
+                    // 'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: JSON.stringify({
+                        email: `${document.querySelectorAll('input')[0].value}`,
+                        pass: `${document.querySelectorAll('input')[1].value}`
+                    })
+            });
+        }
+    </script> -->
 </body>
 </html>

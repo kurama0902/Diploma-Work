@@ -144,7 +144,7 @@ let descriptionModal = document.querySelector('.learn-more-wrap');
 let descriptionBtn = document.querySelector('.learn-more');
 
 descriptionBtn.addEventListener('click', () => {
-    descriptionModal.style.display = 'block';
+    descriptionModal.style.display = 'flex';
     document.body.style.overflowY = 'hidden';
 })
 

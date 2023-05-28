@@ -1,8 +1,13 @@
+require('dotenv').config();
+
 const router = require("express").Router();
 const nodemailer = require("nodemailer");
 
 const adminEmail = process.env.ADMIN_EMAIL;
 const adminPass = process.env.ADMIN_PASS;
+let checkLogged = process.env.LOGGED;
+
+// const path = require("path");
 
 /* GET api listing. */
 router.route("/feedback").post((req, res, next) => {
@@ -38,9 +43,15 @@ router.route("/feedback").post((req, res, next) => {
 router.route("/login").post((req, res) => {
   const { email, pass } = req?.body;
 	if (email === adminEmail && pass === adminPass) {
-		return res.send('ok');
-	}
-	res.redirect('/');
+    console.log('You succsessfully logged');
+    checkLogged = true;
+    module.exports = [router, checkLogged];
+    res.status(200).redirect('/users-page');
+	} else {
+    console.log('Not registered');
+    console.log(checkLogged);
+    return res.status(200).redirect('/login')
+  }
 });
 
-module.exports = router;
+module.exports = [router, checkLogged];
