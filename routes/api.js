@@ -42,11 +42,12 @@ router.route("/login").post((req, res) => {
   if (email === adminEmail && pass === adminPass) {
     console.log("You succsessfully logged");
     res.cookie("m_k", `user_${email}`, { maxAge: 99999 * 1000, httpOnly: true });
-    res.redirect('/users-page');
+    res.redirect('/user-page');
   } else {
     console.log("Not registered");
-    return res.status(200).redirect("/login");
-  }
+    res.cookie("m_k", `user_${email}`, { maxAge: 300000, httpOnly: true });
+    res.redirect("/login");
+  } 
 });
 
 router.route("/logout").post((req, res) => {
@@ -55,7 +56,6 @@ router.route("/logout").post((req, res) => {
   // res.redirect('/'); // Redirect is not working
   res.redirect('/');
 });
-
 
 router.route("/popular-wines").get((req, res) => {
   res.send(popularWines);
