@@ -1,45 +1,54 @@
-const router  = require("express").Router();
-let checkedLogged = require('./api')[1];
+const router = require("express").Router();
 const path = require("path");
 
-router.route("/")
-    .get((req, res) => {
-        res.sendFile(path.join(__dirname, '../public/pages/index.html'));
-    });
-router.route("/home")
-    .get((req, res) => {
-        res.sendFile(path.join(__dirname, '../public/pages/index.html'));
-    });
-router.route("/index.html")
-    .get((req, res) => {
-        res.sendFile(path.join(__dirname, '../public/pages/index.html'));
-    });
-router.route("/login")
-    .get((req, res) => {
-        checkedLogged = require('./api')[1];
-        if(checkedLogged == true) {
-            res.redirect('/users-page');
-        } else {
-            res.sendFile(path.join(__dirname, '../public/pages/login.html'));
-        }
-    });
-router.route("/shopping-bag")
-    .get((req, res) => {
-        res.sendFile(path.join(__dirname, '../public/pages/shopping-bag.html'));
-    });
-router.route("/wine")
-    .get((req, res) => {
-        res.sendFile(path.join(__dirname, '../public/pages/wine.html'));
-    });
-router.route("/users-page")
-    .get((req, res) => {
-        checkedLogged = require('./api')[1];
-        if(checkedLogged == true) {
-            console.log(checkedLogged);
-            res.sendFile(path.join(__dirname, '../public/pages/user-page.html'));
-        } else {
-            res.redirect('/login')
-        }
-    });
+const checkAuth = (req, res, next) => {
+  const login = req.cookies['m_k'];
+  if (login) {
+    next();
+  } else {
+    res.sendFile(path.join(__dirname, "../public/pages/login.html"));
+  }
+};
+
+router.route("/").get((req, res) => {
+  if(!req.cookies['m_k']) {
+    res.sendFile(path.join(__dirname, "../public/pages/index.html"));
+  } else {
+    res.redirect('/shopping');
+  }
+});
+router.route("/home").get((req, res) => {
+  if(!req.cookies['m_k']) {
+    res.sendFile(path.join(__dirname, "../public/pages/index.html"));
+  } else {
+    res.redirect('/shopping');
+  }
+});
+router.route("/index.html").get((req, res) => {
+  if(!req.cookies['m_k']) {
+    res.sendFile(path.join(__dirname, "../public/pages/index.html"));
+  } else {
+    res.redirect('/shopping');
+  }
+});
+router.route("/login").get(checkAuth, (req, res) => {
+    res.redirect('/users-page');
+});
+router.route("/shopping").get((req, res) => {
+  if(!req.cookies['m_k']) {
+    res.redirect('/');
+  } else {
+    res.sendFile(path.join(__dirname, "../public/pages/indexLogout.html"));
+  }
+})
+router.route("/shopping-bag").get((req, res) => {
+  res.sendFile(path.join(__dirname, "../public/pages/shopping-bag.html"));
+});
+router.route("/wine").get((req, res) => {
+  res.sendFile(path.join(__dirname, "../public/pages/wine.html"));
+});
+router.route("/users-page").get(checkAuth, (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/pages/user-page.html"));
+});
 
 module.exports = router;

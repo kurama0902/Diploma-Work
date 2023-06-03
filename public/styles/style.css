@@ -109,6 +109,17 @@ body {
     gap: 27px;
 }
 
+#logout {
+    border: none;
+    cursor: pointer;
+    color: yellow;
+    box-shadow: 1px 1px 1px white, -1px -1px 1px white;
+}
+
+#logout:hover {
+    background-color: #575e7a;
+}
+
 .header-nav-link {
     font-family: 'Roboto';
     font-style: normal;
@@ -253,17 +264,119 @@ button[disabled]:hover {
     color: white;
 }
 
+.user-wrap {
+    position: relative;
+}
+
+.mob-nav-link {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 21px;
+    text-decoration: none;
+    border: 1px solid lightgray;
+    width: 100%;
+}
+
+.mob-nav-link:hover {
+    background-color: #575e7a;
+    color: white;
+}
+
+#mob-logout {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 21px;
+    text-decoration: none;
+    border: 1px solid lightgray;
+    width: 100%;
+}
+
+#mob-logout:hover {
+    background-color: #575e7a;
+    color: white;
+}
+
+.userpage-logout {
+    display: none;
+    flex-direction: column;
+    width: 300px;
+    padding: 10px;
+    background-color: white;
+    position: absolute;
+    top: -70px;
+    right: -12px;
+    gap: 5px;
+}
+
+#userpage-logout {
+    top: -113px;
+}
+
 .header-log-in {
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    color: white;
+    border: none;
+    border-radius: 100%;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.header-log-in:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 79px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     color: white;
-    border-radius: 8px;
-    background-color: #434960;
+    border: none;
+    border-radius: 100%;
+    background-color: lightgray;
     text-decoration: none;
 }
+
+.user-page-pc {
+    display: none;
+    flex-direction: column;
+    background-color: white;
+    padding: 7px;
+    position: absolute;
+    top: 48px;
+    right: 7px;
+    z-index: 1;
+    gap: 5px;
+}
+
+.login-wrap {
+    position: relative;
+}
+
+.user-page-link-pc {
+    cursor: pointer;
+    font-family: Arial;
+    font-size: 20px;
+    padding: 7px;
+    border-radius: 12px;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.user-page-link-pc {
+    padding: 10px;
+    border: 1px solid lightgray;
+    width: 300px;
+    border-radius: 15px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.user-page-link-pc:hover {
+    background-color: #575e7a;
+    color: white;
+}
+
 
 .slider {
     max-width: 1440px;
@@ -1077,6 +1190,10 @@ button[disabled]:hover {
         gap: 10px;
     }
 
+    .login-wrap {
+        display: none;
+    }
+
     #notification-popup-wrap {
         display: none !important;
     }
@@ -1116,6 +1233,10 @@ button[disabled]:hover {
     } */
 
     .header-second-section a {
+        display: none;
+    }
+
+    #logout {
         display: none;
     }
 

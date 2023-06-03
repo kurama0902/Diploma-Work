@@ -78,7 +78,16 @@
                         <path d="M1 5L4 1H16L19 5M1 5V19C1 20.1046 1.89543 21 3 21H17C18.1046 21 19 20.1046 19 19V5M1 5H19M14 9C14 11.2091 12.2091 13 10 13C7.79086 13 6 11.2091 6 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </a>
-                <a href="/login" class="header-log-in">Log in</a>
+                <div class="login-wrap">
+                    <button class="header-log-in">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" style="width: 30px; height:30px;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1">
+                            <path d="M843.282963 870.115556c-8.438519-140.515556-104.296296-257.422222-233.908148-297.14963C687.881481 536.272593 742.4 456.533333 742.4 364.088889c0-127.241481-103.158519-230.4-230.4-230.4S281.6 236.847407 281.6 364.088889c0 92.444444 54.518519 172.183704 133.12 208.877037-129.611852 39.727407-225.46963 156.634074-233.908148 297.14963-0.663704 10.903704 7.964444 20.195556 18.962963 20.195556l0 0c9.955556 0 18.299259-7.774815 18.962963-17.73037C227.745185 718.506667 355.65037 596.385185 512 596.385185s284.254815 122.121481 293.357037 276.195556c0.568889 9.955556 8.912593 17.73037 18.962963 17.73037C835.318519 890.311111 843.946667 881.019259 843.282963 870.115556zM319.525926 364.088889c0-106.287407 86.186667-192.474074 192.474074-192.474074s192.474074 86.186667 192.474074 192.474074c0 106.287407-86.186667 192.474074-192.474074 192.474074S319.525926 470.376296 319.525926 364.088889z"></path>
+                        </svg>
+                    </button>
+                    <div class="user-page-pc">
+                        <a class="user-page-link-pc" href="/users-page">User page</a>
+                    </div>
+                </div>
                 <!-- <script src="liked-modal.js"></script> -->
             </div>
         </header>
@@ -287,11 +296,16 @@
             </svg>
             <div class="liked-goods-counter" id="liked-goods-counter-mob" style="display: none;"></div>
         </button>
-        <a href="/users-page" class="mobile-nav-user">
-            <svg width="19" height="20" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M17.1 19V17C17.1 14.7909 15.3091 13 13.1 13H5.09998C2.89084 13 1.09998 14.7909 1.09998 17V19M9.09998 9C11.3091 9 13.1 7.20914 13.1 5C13.1 2.79086 11.3091 1 9.09998 1C6.89084 1 5.09998 2.79086 5.09998 5C5.09998 7.20914 6.89084 9 9.09998 9Z" stroke="#434960" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </a>
+        <div class="user-wrap">
+            <div class="userpage-logout" id="userpg-logout">
+                <a class="mob-nav-link" href="/users-page">User page</a>
+            </div>
+            <button class="mobile-nav-user">
+                <svg width="19" height="20" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.1 19V17C17.1 14.7909 15.3091 13 13.1 13H5.09998C2.89084 13 1.09998 14.7909 1.09998 17V19M9.09998 9C11.3091 9 13.1 7.20914 13.1 5C13.1 2.79086 11.3091 1 9.09998 1C6.89084 1 5.09998 2.79086 5.09998 5C5.09998 7.20914 6.89084 9 9.09998 9Z" stroke="#434960" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+            </button>
+        </div>
     </div>
     <div class="liked-and-busket-items-modal-wrap" id="liked-items-modal-wrap">
         <div class="liked-busket-wrap">
@@ -342,6 +356,29 @@
                 document.getElementById('go-up').style.display = 'none';
             }
             // console.log(window.scrollY);
+        })
+
+        const userMobBtn = document.querySelector('.mobile-nav-user');
+
+        userMobBtn.addEventListener('click', () => {
+            const popup = document.getElementById('userpg-logout');
+
+            if(popup.style.display != 'flex') {
+                popup.style.display = 'flex';
+            } else {
+                popup.style.display = 'none';
+            }
+        })
+
+        const userBtn = document.querySelector('.header-log-in');
+        const usrPagePC = document.querySelector('.user-page-pc');
+
+        userBtn.addEventListener('click', () => {
+            if(usrPagePC.style.display != 'flex') {
+                usrPagePC.style.display = 'flex';
+            } else {
+                usrPagePC.style.display = 'none';
+            }
         })
     </script>
     <script src="../js/db.js"></script>

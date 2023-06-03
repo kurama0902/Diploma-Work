@@ -135,6 +135,34 @@ body {
     background-color: lightgray;
 }
 
+.orderbtn-wrap {
+    display: none;
+    justify-content: end;
+    padding: 20px;
+    max-width: 1440px;
+    margin: auto;
+}
+
+.order-btn {
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: white;
+    background-color: #6571a3;
+    border-radius: 8px;
+}
+
+.order-btn:hover {
+    background-color: #7e8dc9;
+}
+
 .liked-items-modal-wrap {
     display: none;
     position: fixed;

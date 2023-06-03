@@ -86,11 +86,23 @@ const buyAction = (e) => {
 
     const wineId = e.target.id.split('').splice(1).join('');
     const busketGoods = JSON.parse(localStorage.getItem('busket-goods')) || [];
+    const items = document.querySelectorAll(`#c${wineId}`);
+
+    busketGoods.forEach(ID => {
+        let allWinesKeys = Object.keys(allWines);
+            allWinesKeys.forEach(key => {
+                let currentWine = allWines[key].find((wine) => String(wine.id) === ID);
+                if(currentWine && document.querySelectorAll(`#c${ID}`).length == 0) {
+                    renderWineInBusketModal(currentWine);
+                }
+            })
+    })
 
     if (busketGoods && busketGoods.length > 0) {
-        if (!busketGoods.includes(wineId)) {
-            busketGoods.push(wineId);
-            localStorage.setItem('busket-goods', JSON.stringify(busketGoods));
+        if (busketGoods.includes(wineId) && items.length == 0 || items.length == 0) {
+            if(!busketGoods.includes(wineId)) {
+                busketGoods.push(wineId);
+                localStorage.setItem('busket-goods', JSON.stringify(busketGoods));
 
             let allWinesKeys = Object.keys(allWines);
             allWinesKeys.forEach(key => {
@@ -99,6 +111,7 @@ const buyAction = (e) => {
                     renderWineInBusketModal(currentWine);
                 }
             }) 
+            }
         }
     } else {
         busketInfo.innerHTML = '<h1 class="busket-label">Goods:</h1>';

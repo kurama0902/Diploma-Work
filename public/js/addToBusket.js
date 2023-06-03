@@ -34,7 +34,7 @@ window.addEventListener('load', function () {
                         </svg>
                     </div>
                     <div class="second-section">
-                        <p>${description}</p>
+                        <p class="name">${description}</p>
                     </div>
                     <div class="price-wrap">
                         <div class="price-description">
@@ -140,6 +140,7 @@ window.addEventListener('load', function () {
             if(busketGoods.length == 1) {
                 busketGoods = []; 
                 newH1.innerText = 'Total: €' + total;
+                document.querySelector('.orderbtn-wrap').style.display = 'none';
             } else {
                busketGoods.splice(busketGoods.indexOf(e.target.id), 1);
                newH1.innerText = 'Total: €' + total;
@@ -171,6 +172,59 @@ function addAndDeleteInTotal(newH1) {
     }
 
     newH1.innerText = 'Total: €' + totalAmount;
+    let orderBtn = document.createElement('button');
+    let orderBtnWrap = document.createElement('div');
+    orderBtnWrap.className = 'orderbtn-wrap';
+    orderBtn.className = 'order-btn';
+    let orderBtnText = document.createTextNode('Order goods');
+    orderBtn.appendChild(orderBtnText);
+    orderBtnWrap.appendChild(orderBtn);
+    document.body.appendChild(orderBtnWrap);
+
+    if(JSON.parse(localStorage.getItem('busket-goods')).length > 0) {
+        document.querySelector('.orderbtn-wrap').style.display = 'flex';
+    } else {
+        document.querySelector('.orderbtn-wrap').style.display = 'none';
+    }
+
+    orderBtn.addEventListener('click', () => {
+        let goodsNames = [];
+        let subtotals = [];
+        let amount = []
+        let totalPrice = document.querySelector('.total-price').innerText;
+
+        document.querySelectorAll('.name').forEach(item => {
+            goodsNames.push(item.innerText);
+        })
+
+        document.querySelectorAll('.subtotal').forEach(item => {
+            subtotals.push(item.innerText);
+        })
+
+        document.querySelectorAll('select').forEach(item => {
+            amount.push(item.value);
+        })
+
+        let orderInfo = '<table border="1" style="padding: 10px">';
+        orderInfo += '<tr><th style="padding: 5px" align="center">Name</th><th style="padding: 5px" align="center">Amount</th><th style="padding: 5px" align="center">Subtotals</th></tr>'
+        for(let i = 0; i < goodsNames.length; i++) {
+            orderInfo += `<tr><td style="padding: 5px" align="center">${goodsNames[i]}</td><td style="padding: 5px" align="center">${amount[i]}</td><td style="padding: 5px" align="center">${subtotals[i]}</td></tr>`;
+        }
+        orderInfo += `<tr><th style="padding: 5px" colspan="3" align="right">${totalPrice}</th></tr></table>`;
+        console.log(goodsNames);
+        fetch('/api/feedback', {
+            method: 'post',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // goodsIDs: JSON.parse(localStorage.getItem('busket-goods')) + '\n',
+                info: orderInfo,
+                totalPrice: totalPrice
+            })
+        })
+    })
+
 }
 
 function amountArrPush() {
