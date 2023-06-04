@@ -53,8 +53,7 @@ router.route("/login").post((req, res) => {
 router.route("/logout").post((req, res) => {
   res.clearCookie('m_k');
   console.log('Deleted cookie');
-  // res.redirect('/'); // Redirect is not working
-  res.redirect('/');
+  res.redirect('/'); // Redirect is not working
 });
 
 router.route("/popular-wines").get((req, res) => {
