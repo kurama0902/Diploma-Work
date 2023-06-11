@@ -25,26 +25,13 @@ router.route("/home").get((req, res) => {
     res.redirect('/shopping');
   }
 });
-router.route("/index.html").get((req, res) => {
-  if(!req.cookies['m_k']) {
-    res.sendFile(path.join(__dirname, "../public/pages/index.html"));
-  } else {
-    res.redirect('/shopping');
-  }
-});
-router.route("/login").get(checkAuth, (req, res) => {
-    res.redirect('/user-page');
-});
 router.route("/shopping").get((req, res) => {
   if(!req.cookies['m_k']) {
     res.redirect('/');
   } else {
-    res.sendFile(path.join(__dirname, "../public/pages/indexLogout.html"));
+    res.sendFile(path.join(__dirname, "../public/pages/index.html"));
   }
 })
-
-  // res.sendFile(path.join(__dirname, "../public/pages/index.html"));
-// });
 router.route("/home").get((req, res) => {
   res.sendFile(path.join(__dirname, "../public/pages/index.html"));
 });
@@ -61,8 +48,6 @@ router.route("/shopping-bag").get((req, res) => {
 router.route("/wine").get((req, res) => {
   res.sendFile(path.join(__dirname, "../public/pages/wine.html"));
 });
-
-// router.route("/users-page").get(checkAuth, (req, res) => {
 
 router.route("/user-page").get(checkAuth, (req, res) => {
 

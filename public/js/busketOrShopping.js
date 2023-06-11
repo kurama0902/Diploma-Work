@@ -8,8 +8,6 @@ continueShoppingBtn.addEventListener('click', function (){
     if(busketModal.style.display == 'flex') {
         busketModal.style.display = 'none';
         document.body.style.overflowY = 'scroll';
-        // let busketInfo = document.getElementById('busket-info-wrap');
-        // busketInfo.innerHTML = '<h1 class="busket-label">Goods:</h1>';
     }
 })
 

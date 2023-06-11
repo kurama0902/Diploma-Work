@@ -8,16 +8,17 @@ let clearFilters = document.querySelector(".clear-filters");
 
 let filterId = null;
 
-let filteredItemsArr = allWines;
+let infoFromDB = null;
+let filteredItemsArr = null;
+fillInfoFromDB();
 
-// fillSelectsFilterByDefault();
 
 filterBtns.forEach((btn) =>
   btn.addEventListener("click", (e) => {
     filterModal.style.display = "flex";
     document.body.style.overflowY = "hidden";
     filterId = e.target.id;
-    filteredItemsArr = allWines;
+    filteredItemsArr = infoFromDB[filterId];
     fillSelectsFilterByDefault();
   })
 );
@@ -31,7 +32,7 @@ year.addEventListener("change", (e) => {
   type.innerHTML = "";
   quality.innerHTML = "";
 
-  allWines[filterId]
+  infoFromDB[filterId]
     .filter((item) => item.year == e.target.value)
     .forEach((item) => {
       if (
@@ -55,7 +56,7 @@ year.addEventListener("change", (e) => {
 type.addEventListener("change", (e) => {
   quality.innerHTML = ``;
 
-  allWines[filterId]
+  infoFromDB[filterId]
     .filter((item) => item.type == e.target.value && item.year == year.value)
     .forEach((item) => {
       if (
@@ -83,7 +84,7 @@ applyFilters.addEventListener("click", () => {
     let showWinesContainer = document.querySelector(`.${filterId}`);
     filteredItemsArr = [];
     showWinesContainer.innerHTML = "";
-    allWines[filterId]
+    infoFromDB[filterId]
       .filter(
         (item) =>
           item.year == yearValue &&
@@ -99,6 +100,7 @@ applyFilters.addEventListener("click", () => {
 });
 
 clearFilters.addEventListener("click", () => {
+  filteredItemsArr = infoFromDB;
   fillSelectsFilterByDefault();
 });
 
@@ -113,7 +115,7 @@ function fillSelectsFilterByDefault() {
   let section = document.querySelector(`.${filterId}`);
   section.innerHTML = "";
 
-  allWines[filterId].forEach((wine) => {
+  infoFromDB[filterId].forEach((wine) => {
     if (
       !year.innerHTML.includes(
         `<option value="${wine.year}">${wine.year}</option>`
@@ -141,4 +143,13 @@ function fillSelectsFilterByDefault() {
     section.innerHTML += markupItem(wine);
     buyAndLikeActions();
   });
+}
+
+
+async function fillInfoFromDB() {
+  infoFromDB = await fetch('/api/popular-wines')
+  .then(infoJSON => infoJSON.json())
+  .then(info => info)
+
+  filteredItemsArr = infoFromDB;
 }

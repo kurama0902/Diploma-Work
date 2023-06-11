@@ -6,14 +6,18 @@ modalWindow.style.alignItems = 'center';
 let closeModalBtn = document.querySelector('#close-liked-modal-btn');
 let heartBtn = [document.querySelector('#header-liked'), document.querySelector('#mobile-nav-liked')];
 
-// let notificationsPC = document.querySelector('.notification-popup-wrap');
-// let notificationsMob = document.querySelector('notification-popup-wrap-mob');
 let popupsList = [document.querySelector('#notification-popup-wrap'), document.querySelector('#notification-popup-wrap-mob')]
 let notificationBtn = document.getElementById('header-notifications');
 let mobNotificationsBtn = document.getElementById('header-notifications-mob');
 
 heartBtn.forEach(btn => {
-    btn.onclick = function showModal(e) {
+    btn.onclick = async function showModal(e) {
+        const infoFromDB = await fetch('/api/popular-wines', {
+            method: 'GET',
+          })
+          .then(infoJSON => infoJSON.json())
+          .then(info => info);
+
         modal.style.display = 'flex';
         document.body.style.overflowY = 'hidden';
         let likedGoods = JSON.parse(localStorage.getItem('liked-goods'));
@@ -27,8 +31,9 @@ heartBtn.forEach(btn => {
         likedGoods.forEach(item => {
 
 
-            allWineCategories.forEach(category => {
-                let likedW = category.find(w => w.id == item);
+            // allWineCategories.forEach(category => {
+            for(let category in infoFromDB) {
+                let likedW = infoFromDB[category].find(w => w.id == item);
                 if(likedW) {
                     let modalWindow = document.getElementById('liked-info-wrap');
                         let {id, cl, cost, year, avaliableAmount, fixedPrice, quality, description, imgURL} = likedW;
@@ -66,7 +71,7 @@ heartBtn.forEach(btn => {
                         modalWindow.querySelectorAll('.buy').forEach(btn => btn.addEventListener('click', buyAction));
                         deleteItemLiked();
                 }
-            })
+            }
         });
     }
 })
@@ -107,14 +112,6 @@ closeModalBtn.onclick = function closeModal() {
     modalWindow.innerHTML = '';
 }
 
-// popupsList.forEach(block => {
-//     if(block.style.display === 'flex') {
-//         block.style.display = 'none';
-//     } else {
-//         block.style.display = 'flex';
-//     }
-// })
-
 notificationBtn.onclick = function showNotificationBlock() {
     popupsList.forEach(block => {
         if(block.style.display === 'flex') {
@@ -136,9 +133,6 @@ mobNotificationsBtn.onclick = function showNotificationBlock() {
 }
 
 
-
-
-
 // Description modal
 let descriptionModal = document.querySelector('.learn-more-wrap');
 let descriptionBtn = document.querySelector('.learn-more');
@@ -156,8 +150,6 @@ descriptionModal.addEventListener('click', (e) => {
         document.body.style.overflowY = 'scroll';
     }
 })
-
-
 
 
 // Modal for basket

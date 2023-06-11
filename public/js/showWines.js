@@ -89,13 +89,12 @@ const buyAction = (e) => {
     const items = document.querySelectorAll(`#c${wineId}`);
 
     busketGoods.forEach(ID => {
-        let allWinesKeys = Object.keys(allWines);
-            allWinesKeys.forEach(key => {
-                let currentWine = allWines[key].find((wine) => String(wine.id) === ID);
+            for(let category in infoFromDB) {
+                let currentWine = infoFromDB[category].find((wine) => String(wine.id) === ID);
                 if(currentWine && document.querySelectorAll(`#c${ID}`).length == 0) {
                     renderWineInBusketModal(currentWine);
                 }
-            })
+            }
     })
 
     if (busketGoods && busketGoods.length > 0) {
@@ -116,12 +115,12 @@ const buyAction = (e) => {
     } else {
         busketInfo.innerHTML = '<h1 class="busket-label">Goods:</h1>';
         localStorage.setItem('busket-goods', JSON.stringify([wineId]));
-        allWineCategories.forEach(category => {
-            const wine = category.find((wine) => String(wine.id) === wineId);
+        for(let category in infoFromDB) {
+            const wine = infoFromDB[category].find((wine) => String(wine.id) === wineId);
             if (wine) {
                 renderWineInBusketModal(wine);
             }
-        })
+        }
     }
 }
 

@@ -5,31 +5,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/style.css">
-    <title>Document</title>
+    <title>Wine</title>
 </head>
 <body class="usp-body">
-    <a href="index.html" class="usp-close-btn">X</button>
-    <script src="../js/db.js"></script>
+    <a href="/" class="usp-close-btn">X</button>
     <script>
-        const goodId = new URLSearchParams(window.location.search).get('id');
 
-        if (goodId) {
+        async function showWine() {
+            const infoFromDB = await fetch('/api/popular-wines')
+            .then(infoJSON => infoJSON.json())
+            .then(info => info)
 
-            allWineCategories.forEach(category => {
-                let wine = category.find((item) => item.id === Number(goodId));
-                
-                if(wine) {
-                    document.body.innerHTML += `
-                <div class="viewed-wine-description">
-                <div class="img-and-nameOfWine-description" style="background-image: url('${wine.imgURL}');">
-                    <p class="nameOfWine-description">${wine.description}</p>
+            const goodId = new URLSearchParams(window.location.search).get('id');
+
+            if (goodId) {
+
+                for(let category in infoFromDB) {
+                    let wine = infoFromDB[category].find((item) => item.id === Number(goodId));
+                    
+                    if(wine) {
+                        document.body.innerHTML += `
+                    <div class="viewed-wine-description">
+                    <div class="img-and-nameOfWine-description" style="background-image: url('${wine.imgURL}');">
+                        <p class="nameOfWine-description">${wine.description}</p>
+                    </div>
+                    <p class="item-description">${wine.wineAllDescription}</p>           
                 </div>
-                <p class="item-description">${wine.wineAllDescription}</p>           
-            </div>
-                `;
+                    `;
+                    }
                 }
-            });
+            }
         }
+
+        showWine();
     </script>
 </body>
 </html>

@@ -9,11 +9,16 @@ let busketGoods = JSON.parse(localStorage.getItem('busket-goods'))
 
 let amountArr = [];
 
-window.addEventListener('load', function () {
+window.addEventListener('load', async function () {
+    const infoFromDB = await fetch('api/popular-wines')
+    .then(infoJSON => infoJSON.json())
+    .then(info => info)
+    console.log(infoFromDB);
     goodsAmount.innerHTML += `(${busketItems.length}):`;
     busketGoods.forEach(item => {
-        allWineCategories.forEach(category => {
-            let winchik = category.find(wino => wino.id == item)
+        // res.forEach(category => {
+            for(let category in infoFromDB) {
+            let winchik = infoFromDB[category].find(wino => wino.id == item)
 
             if(winchik) {
                 let {id, cl, cost, year, avaliableAmount, fixedPrice, quality, description, type, imgURL} = winchik;
@@ -82,7 +87,7 @@ window.addEventListener('load', function () {
 
 
 
-        })
+        }
         
     });
 
