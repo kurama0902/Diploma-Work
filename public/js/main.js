@@ -18,6 +18,9 @@ async function insertGoods () {
   infoFromDB.winesPremium.forEach(item => {
     winesWrap[2].innerHTML += markupItem(item);
   });
+
+  buyAndLikeActions();
+  // deleteItemLiked();
 }
 
 insertGoods();

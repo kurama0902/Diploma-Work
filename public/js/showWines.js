@@ -103,9 +103,9 @@ const buyAction = (e) => {
                 busketGoods.push(wineId);
                 localStorage.setItem('busket-goods', JSON.stringify(busketGoods));
 
-            let allWinesKeys = Object.keys(allWines);
+            let allWinesKeys = Object.keys(infoFromDB);
             allWinesKeys.forEach(key => {
-                let currentWine = allWines[key].find((wine) => String(wine.id) === wineId);
+                let currentWine = infoFromDB[key].find((wine) => String(wine.id) === wineId);
                 if(currentWine) {
                     renderWineInBusketModal(currentWine);
                 }

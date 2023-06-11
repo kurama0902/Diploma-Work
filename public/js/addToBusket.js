@@ -141,7 +141,7 @@ window.addEventListener('load', async function () {
         deleteBtns = document.querySelectorAll('.cross');
         deleteBtns.forEach(item => item.addEventListener('click', function (e) { 
 
-            let total = Number(newH1.innerText.split(': €')[1]) - Number(item.parentNode.querySelector('.subtotal').innerText.split('').splice(1).join('')); // Розiбратися із ціною за доставку
+            let total = Number(newH1.innerText.split(': €')[1]) - Number(item.parentNode.querySelector('.subtotal').innerText.split('').splice(1).join(''));
             if(busketGoods.length == 1) {
                 busketGoods = []; 
                 newH1.innerText = 'Total: €' + total;
